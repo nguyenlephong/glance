@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Câu hỏi sử dụng / cài đặt
+    url: https://github.com/nguyenlephong/glance/discussions
+    about: Hỏi cách dùng, troubleshooting cài đặt — dùng Discussions thay vì Issue
+  - name: Hướng dẫn cài đặt
+    url: https://github.com/nguyenlephong/glance/blob/main/apps/macos/INSTALL.md
+    about: Đọc hướng dẫn bypass Gatekeeper + cấp quyền Accessibility
+  - name: Email maintainer (riêng tư)
+    url: mailto:phongnguyen.itengineer@gmail.com
+    about: Báo lỗi bảo mật hoặc vi phạm Code of Conduct

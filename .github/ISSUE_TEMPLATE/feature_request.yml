@@ -1,0 +1,59 @@
+name: Đề xuất tính năng
+description: Có idea cho Glance — engine mới, hotkey mới, UX cải tiến, v.v.
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Mình rất hoan nghênh idea. Vài lưu ý trước khi anh/chị viết:
+
+        - Glance cố giữ **gọn và tập trung**. Không phải mọi idea hay đều phù hợp với scope hiện tại
+        - Một số thứ đã trong [ROADMAP.md](../../docs/ROADMAP.md) — vui lòng đọc trước
+        - Nếu idea liên quan đến platform mới (Windows, Linux), nói rõ stack đề xuất
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Vấn đề đang giải quyết
+      description: Anh/chị đang gặp tình huống nào mà Glance hiện tại chưa làm tốt?
+      placeholder: |
+        Ví dụ: "Khi đọc tài liệu kỹ thuật tiếng Anh, mình muốn AI hiểu context
+        'technical documentation' để dịch chính xác hơn Google Translate."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Idea giải pháp
+      description: Tính năng / UX anh/chị mường tượng ra như nào?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Đã thử cách nào khác?
+      description: Hiện anh/chị đang work-around bằng cách nào? Có app khác làm được điều này không?
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope ước lượng
+      description: Anh/chị nghĩ idea này thuộc tầm nào
+      options:
+        - "Nhỏ — chỉnh setting / label / icon"
+        - "Vừa — feature mới trong scope hiện tại (engine, hotkey, UX)"
+        - "Lớn — feature lớn (OCR, history, AI streaming, platform mới)"
+        - "Không chắc"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Anh/chị có muốn tự code không?
+      options:
+        - label: Có — sẵn sàng mở PR nếu được approve idea
+        - label: Cần hướng dẫn — sẵn sàng học nhưng cần mentor một chút
+        - label: Không — chỉ đề xuất, để maintainer quyết

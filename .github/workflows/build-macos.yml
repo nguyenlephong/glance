@@ -1,0 +1,82 @@
+name: build-macos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/macos/**"
+      - ".github/workflows/build-macos.yml"
+  pull_request:
+    paths:
+      - "apps/macos/**"
+      - ".github/workflows/build-macos.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: build-macos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build (Debug + Release, universal)
+    runs-on: macos-15
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: apps/macos
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build Debug
+        run: |
+          xcodebuild \
+            -project Glance.xcodeproj \
+            -scheme Glance \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGN_STYLE=Manual \
+            build
+
+      - name: Build Release (universal arm64 + x86_64)
+        run: |
+          xcodebuild \
+            -project Glance.xcodeproj \
+            -scheme Glance \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -derivedDataPath build \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGN_STYLE=Manual \
+            ARCHS="arm64 x86_64" \
+            ONLY_ACTIVE_ARCH=NO \
+            build
+
+      - name: Verify universal binary
+        run: |
+          APP="build/Build/Products/Release/Glance.app"
+          lipo -info "$APP/Contents/MacOS/Glance"
+          codesign -dvv "$APP" || true
+
+      - name: Upload .app artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Glance-debug-build
+          path: apps/macos/build/Build/Products/Release/Glance.app
+          if-no-files-found: error
+          retention-days: 14

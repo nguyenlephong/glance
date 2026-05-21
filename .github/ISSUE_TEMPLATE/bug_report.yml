@@ -1,0 +1,91 @@
+name: Báo lỗi
+description: Glance không hoạt động như mong đợi
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Cảm ơn anh/chị dành thời gian báo lỗi cho Glance.
+        Một bug report rõ ràng giúp mình fix nhanh hơn nhiều.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Chuyện gì đã xảy ra?
+      description: Mô tả ngắn gọn — bôi đen text ở đâu, bấm hotkey, kỳ vọng gì, thực tế ra sao
+      placeholder: |
+        Ví dụ: "Mình bôi đen 1 câu tiếng Anh trong Zalo Desktop và bấm ⌃⌥T.
+        Mong panel hiện bản dịch tiếng Việt, nhưng panel chỉ hiện thông báo
+        'Không đọc được văn bản đang bôi đen'."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: app
+    attributes:
+      label: App đang dùng khi gặp lỗi
+      description: App nào chứa văn bản anh/chị bôi đen
+      options:
+        - Safari
+        - Chrome / Edge / Brave
+        - Mail
+        - Notes / TextEdit
+        - Xcode / VS Code / Cursor
+        - Slack / Discord / Zalo / Telegram / Messenger
+        - PDF reader (Preview, PDF Expert, etc.)
+        - Khác (ghi rõ trong "Chuyện gì đã xảy ra")
+    validations:
+      required: true
+
+  - type: input
+    id: macos-version
+    attributes:
+      label: Phiên bản macOS
+      placeholder: "ví dụ: 14.5 (Sonoma) hoặc 15.0 (Sequoia)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: chip
+    attributes:
+      label: Loại máy
+      options:
+        - Apple Silicon (M1 / M2 / M3 / M4)
+        - Intel
+    validations:
+      required: true
+
+  - type: input
+    id: glance-version
+    attributes:
+      label: Phiên bản Glance
+      description: Xem ở menu bar → Cài đặt → Về Glance, hoặc kiểm tra tên file DMG
+      placeholder: "ví dụ: 0.1.0"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: settings
+    attributes:
+      label: Setting đã bật
+      options:
+        - label: Hỗ trợ app Electron (clipboard fallback)
+        - label: Đã cấp quyền Accessibility trong System Settings
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Các bước tái hiện
+      description: Liệt kê từng bước để mình có thể reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Ảnh chụp / log / context thêm
+      description: Drag-drop screenshot vào đây. Hoặc ghi rõ behavior khi thử ở app khác (Safari? TextEdit?)
